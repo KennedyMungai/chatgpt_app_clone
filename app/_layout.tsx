@@ -3,6 +3,7 @@ import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
+import { View } from 'react-native'
 import 'react-native-reanimated'
 
 export {
@@ -41,7 +42,17 @@ function RootLayoutNav() {
 	return (
 		<Stack>
 			<Stack.Screen name='index' options={{ headerShown: false }} />
-			<Stack.Screen name='login' options={{ presentation: 'modal' }} />
+			<Stack.Screen
+				name='login'
+				options={{
+					presentation: 'modal',
+					animation: 'slide_from_bottom',
+					headerStyle: {
+						backgroundColor: 'white'
+					},
+					headerShadowVisible: false
+				}}
+			/>
 		</Stack>
 	)
 }

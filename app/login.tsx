@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 const LoginPage = () => {
 	return (
-		<View>
+		<View style={styles.container}>
 			<Text>Login</Text>
 		</View>
 	)
@@ -11,4 +11,9 @@ const LoginPage = () => {
 
 export default LoginPage
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: 'white',
+		flex: 1
+	}
+})
