@@ -1,12 +1,15 @@
 import Colors from '@/constants/Colors'
 import React from 'react'
-import { StyleSheet, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, useWindowDimensions } from 'react-native'
 import Animated, {
 	interpolate,
 	interpolateColor,
+	useAnimatedReaction,
 	useAnimatedStyle,
 	useDerivedValue,
-	useSharedValue
+	useSharedValue,
+	withDelay,
+	withTiming
 } from 'react-native-reanimated'
 import { ReText } from 'react-native-redash'
 
@@ -61,7 +64,7 @@ const AnimatedIntro = () => {
 		return currentIndex.value
 	}, [currentIndex])
 
-	// Styles
+	//#region Styles
 	const textStyle = useAnimatedStyle(() => {
 		return {
 			color: interpolateColor(
@@ -137,7 +140,58 @@ const AnimatedIntro = () => {
 			}
 		]
 	}))
-	// End Styles
+	//#endregion End Styles
+
+	//#region Reactions
+	useAnimatedReaction(
+		() => labelWidth.value,
+		(newWidth) => {
+			currentX.value = withDelay(
+				1000,
+				withTiming(
+					half + newWidth / 2,
+					{
+						duration: 800
+					},
+					(finished) => {
+						if (finished) {
+							canGoToNext.value = true
+							isAtStart.value = false
+						}
+					}
+				)
+			)
+		},
+		[labelWidth, currentX, half]
+	)
+
+	useAnimatedReaction(
+		() => canGoToNext.value,
+		(next) => {
+			if (next) {
+				canGoToNext.value = false
+				currentX.value = withDelay(
+					1000,
+					withTiming(
+						half,
+						{
+							duration: 800
+						},
+						(finished) => {
+							if (finished) {
+								currentIndex.value =
+									(currentIndex.value + 1) % content.length
+								isAtStart.value = true
+								didPlay.value = false
+							}
+						}
+					)
+				)
+			}
+		},
+		[currentX, labelWidth]
+	)
+	//#endregion End Reactions
 
 	return (
 		<Animated.View style={[styles.wrapper, style1]}>
