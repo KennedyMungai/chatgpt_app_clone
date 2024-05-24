@@ -28,7 +28,7 @@ const LoginPage = () => {
 		<KeyboardAvoidingView
 			style={styles.container}
 			behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-			keyboardVerticalOffset={1}
+			keyboardVerticalOffset={70}
 		>
 			{loading && (
 				<View
