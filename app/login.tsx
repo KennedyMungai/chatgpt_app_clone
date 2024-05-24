@@ -47,7 +47,7 @@ const LoginPage = () => {
 			})
 		} catch (error: any) {
 			console.error(error.message)
-			Alert.alert(error.errors[0].message)
+			Alert.alert(error.message)
 		} finally {
 			setLoading(false)
 		}
@@ -69,7 +69,7 @@ const LoginPage = () => {
 			})
 		} catch (error: any) {
 			console.error(error.message)
-			Alert.alert(error.errors[0].message)
+			Alert.alert(error.message)
 		} finally {
 			setLoading(false)
 		}
