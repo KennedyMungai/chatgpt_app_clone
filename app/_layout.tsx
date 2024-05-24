@@ -6,7 +6,7 @@ import { Slot, Stack, router, useRouter, useSegments } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import * as SplashScreen from 'expo-splash-screen'
 import React, { useEffect } from 'react'
-import { TouchableOpacity } from 'react-native'
+import { ActivityIndicator, TouchableOpacity, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'react-native-reanimated'
 
@@ -56,7 +56,17 @@ export default function RootLayout() {
 	}, [loaded])
 
 	if (!loaded) {
-		return <Slot />
+		return (
+			<View
+				style={{
+					flex: 1,
+					justifyContent: 'center',
+					alignItems: 'center'
+				}}
+			>
+				<ActivityIndicator size={40} color='black' />
+			</View>
+		)
 	}
 
 	return <RootLayoutNav />
@@ -66,7 +76,18 @@ const InitialLayout = () => {
 	const { isLoaded, isSignedIn } = useAuth()
 	const segments = useSegments()
 
-	if (!isLoaded) return <Slot />
+	if (!isLoaded)
+		return (
+			<View
+				style={{
+					flex: 1,
+					justifyContent: 'center',
+					alignItems: 'center'
+				}}
+			>
+				<ActivityIndicator size={40} color='black' />
+			</View>
+		)
 
 	useEffect(() => {
 		if (!isLoaded) return
