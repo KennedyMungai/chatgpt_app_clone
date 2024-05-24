@@ -2,7 +2,11 @@ import React from 'react'
 import { Stack } from 'expo-router'
 
 const AuthLayout = () => {
-	return <Stack />
+	return (
+		<Stack>
+			<Stack.Screen name='(drawer)' options={{ headerShown: false }} />
+		</Stack>
+	)
 }
 
 export default AuthLayout
