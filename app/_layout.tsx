@@ -50,6 +50,7 @@ function RootLayoutNav() {
 				options={{
 					presentation: 'modal',
 					animation: 'slide_from_bottom',
+					animationDuration: 200,
 					title: '',
 					headerStyle: {
 						backgroundColor: 'white'
