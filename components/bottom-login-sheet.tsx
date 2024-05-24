@@ -25,7 +25,7 @@ const BottomLoginSheet = () => {
 				<Text style={styles.btnDarkText}>Continue with Apple</Text>
 			</TouchableOpacity>
 			<Link
-				href='/login'
+				href={{ pathname: '/login', params: { type: 'register' } }}
 				asChild
 				style={[defaultStyles.btn, styles.btnDark]}
 			>
@@ -40,7 +40,7 @@ const BottomLoginSheet = () => {
 				</TouchableOpacity>
 			</Link>
 			<Link
-				href='/login'
+				href={{ pathname: '/login', params: { type: 'login' } }}
 				asChild
 				style={[defaultStyles.btn, styles.btnDark]}
 			>
