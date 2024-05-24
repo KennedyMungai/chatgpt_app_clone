@@ -1,9 +1,11 @@
 import Colors from '@/constants/Colors'
 import { defaultStyles } from '@/constants/Styles'
+import { useSignIn, useSignUp } from '@clerk/clerk-expo'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
 import {
 	ActivityIndicator,
+	Alert,
 	Image,
 	KeyboardAvoidingView,
 	Platform,
@@ -20,9 +22,58 @@ const LoginPage = () => {
 	const [emailAddress, setEmailAddress] = useState('')
 	const [password, setPassword] = useState('')
 
-	const onSignUpPress = async () => {}
+	const {
+		signUp,
+		isLoaded: signUpLoaded,
+		setActive: signUpSetActive
+	} = useSignUp()
 
-	const onSignInPress = async () => {}
+	const {
+		signIn,
+		isLoaded: signInLoaded,
+		setActive: signInSetActive
+	} = useSignIn()
+
+	const onSignUpPress = async () => {
+		if (!signUpLoaded) return null
+
+		setLoading(true)
+
+		try {
+			const result = await signUp.create({ emailAddress, password })
+
+			signUpSetActive({
+				session: result.createdSessionId
+			})
+		} catch (error: any) {
+			console.error(error.message)
+			Alert.alert(error.errors[0].message)
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	const onSignInPress = async () => {
+		if (!signInLoaded) return null
+
+		setLoading(true)
+
+		try {
+			const result = await signIn.create({
+				identifier: emailAddress,
+				password
+			})
+
+			signInSetActive({
+				session: result.createdSessionId
+			})
+		} catch (error: any) {
+			console.error(error.message)
+			Alert.alert(error.errors[0].message)
+		} finally {
+			setLoading(false)
+		}
+	}
 
 	return (
 		<KeyboardAvoidingView
