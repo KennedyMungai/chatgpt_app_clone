@@ -1,9 +1,10 @@
+import { Ionicons } from '@expo/vector-icons'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useFonts } from 'expo-font'
-import { Stack } from 'expo-router'
+import { Stack, useRouter } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
-import { View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import 'react-native-reanimated'
 
 export {
@@ -39,6 +40,8 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+	const router = useRouter()
+
 	return (
 		<Stack>
 			<Stack.Screen name='index' options={{ headerShown: false }} />
@@ -51,7 +54,12 @@ function RootLayoutNav() {
 					headerStyle: {
 						backgroundColor: 'white'
 					},
-					headerShadowVisible: false
+					headerShadowVisible: false,
+					headerLeft: () => (
+						<TouchableOpacity onPress={() => router.back()}>
+							<Ionicons name='close-outline' size={28} />
+						</TouchableOpacity>
+					)
 				}}
 			/>
 		</Stack>
