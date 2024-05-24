@@ -103,6 +103,7 @@ const InitialLayout = () => {
 					)
 				}}
 			/>
+			<Stack.Screen name='(auth)' options={{ headerShown: false }} />
 		</Stack>
 	)
 }
