@@ -1,8 +1,8 @@
-import { ClerkProvider } from '@clerk/clerk-expo'
+import { ClerkProvider, useAuth } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useFonts } from 'expo-font'
-import { Stack, router, useRouter } from 'expo-router'
+import { Slot, Stack, router, useRouter } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import * as SplashScreen from 'expo-splash-screen'
 import React, { useEffect } from 'react'
@@ -10,7 +10,8 @@ import { TouchableOpacity } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'react-native-reanimated'
 
-const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
+const CLERK_PUBLISHABLE_KEY = process.env
+	.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY as string
 
 const tokenCache = {
 	async getToken(key: string) {
@@ -55,13 +56,17 @@ export default function RootLayout() {
 	}, [loaded])
 
 	if (!loaded) {
-		return null
+		return <Slot />
 	}
 
 	return <RootLayoutNav />
 }
 
 const InitialLayout = () => {
+	const { isLoaded, isSignedIn } = useAuth()
+
+	if (!isLoaded) return <Slot />
+
 	return (
 		<Stack>
 			<Stack.Screen name='index' options={{ headerShown: false }} />
