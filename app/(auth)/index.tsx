@@ -1,10 +1,13 @@
+import { useAuth } from '@clerk/clerk-expo'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, View } from 'react-native'
 
 const AuthPage = () => {
+	const { signOut } = useAuth()
+
 	return (
 		<View>
-			<Text>AuthPage</Text>
+			<Button title='Sign Out' onPress={() => signOut()} />
 		</View>
 	)
 }
