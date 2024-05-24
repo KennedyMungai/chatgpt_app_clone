@@ -1,4 +1,4 @@
-export default {
+const Colors = {
 	primary: '#20AB6E',
 	lime: '#D7FFD4',
 	pink: '#F655FF',
@@ -16,3 +16,5 @@ export default {
 	selected: '#F7F2F9',
 	dark: '#2F2D32'
 }
+
+export default Colors
