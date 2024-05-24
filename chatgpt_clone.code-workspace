@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["endregion", "Ionicons", "redash"]
+		"cSpell.words": ["endregion", "Ionicons", "redash"],
+		"java.compile.nullAnalysis.mode": "automatic"
 	}
 }
