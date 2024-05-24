@@ -2,7 +2,7 @@ import { useAuth } from '@clerk/clerk-expo'
 import React from 'react'
 import { Button, StyleSheet, View } from 'react-native'
 
-const AuthPage = () => {
+const NewChatPage = () => {
 	const { signOut } = useAuth()
 
 	return (
@@ -12,6 +12,6 @@ const AuthPage = () => {
 	)
 }
 
-export default AuthPage
+export default NewChatPage
 
 const styles = StyleSheet.create({})
