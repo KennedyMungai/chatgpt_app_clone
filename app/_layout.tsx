@@ -47,6 +47,7 @@ function RootLayoutNav() {
 				options={{
 					presentation: 'modal',
 					animation: 'slide_from_bottom',
+					title: '',
 					headerStyle: {
 						backgroundColor: 'white'
 					},
