@@ -2,7 +2,7 @@ import { ClerkProvider, useAuth } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useFonts } from 'expo-font'
-import { Slot, Stack, router, useRouter, useSegments } from 'expo-router'
+import { Stack, router, useRouter, useSegments } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import * as SplashScreen from 'expo-splash-screen'
 import React, { useEffect } from 'react'
@@ -96,7 +96,7 @@ const InitialLayout = () => {
 
 		if (isSignedIn && !inAuthGroup) {
 			// Pushing the user into the authenticated group
-			router.replace('/(auth)/')
+			router.replace('/(auth)')
 		} else if (!isSignedIn && inAuthGroup) {
 			// Pushing the user out of the authenticated group
 			router.replace('/')
