@@ -2,7 +2,7 @@ import { ClerkProvider, useAuth } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useFonts } from 'expo-font'
-import { Slot, Stack, router, useRouter } from 'expo-router'
+import { Slot, Stack, router, useRouter, useSegments } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import * as SplashScreen from 'expo-splash-screen'
 import React, { useEffect } from 'react'
@@ -64,8 +64,17 @@ export default function RootLayout() {
 
 const InitialLayout = () => {
 	const { isLoaded, isSignedIn } = useAuth()
+	const segments = useSegments()
 
 	if (!isLoaded) return <Slot />
+
+	useEffect(() => {
+		if (!isLoaded) return
+
+		const segment = segments[0]
+
+		console.log(segment)
+	}, [isSignedIn])
 
 	return (
 		<Stack>
