@@ -71,9 +71,15 @@ const InitialLayout = () => {
 	useEffect(() => {
 		if (!isLoaded) return
 
-		const segment = segments[0]
+		const inAuthGroup = segments[0] === '(auth)'
 
-		console.log(segment)
+		if (isSignedIn && !inAuthGroup) {
+			// Pushing the user into the authenticated group
+			router.replace('/(auth)/')
+		} else if (!isSignedIn && inAuthGroup) {
+			// Pushing the user out of the authenticated group
+			router.replace('/')
+		}
 	}, [isSignedIn])
 
 	return (
