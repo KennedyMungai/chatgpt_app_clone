@@ -22,10 +22,21 @@ const HeaderDropdown = ({
 	return (
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
-				<View>
+				<View
+					style={{
+						flexDirection: 'row',
+						alignItems: 'center',
+						gap: 16
+					}}
+				>
 					<Text style={{ fontWeight: '500', fontSize: 16 }}>
 						{title}
 					</Text>
+					{selected && (
+						<Text style={{ fontWeight: '600', fontSize: 14 }}>
+							{selected} &gt;
+						</Text>
+					)}
 				</View>
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content>
