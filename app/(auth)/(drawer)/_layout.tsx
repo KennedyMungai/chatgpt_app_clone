@@ -102,6 +102,7 @@ const DrawerLayout = () => {
 				name='(chat)/new'
 				options={{
 					title: 'ChatGPT',
+					headerTitleAlign: 'center',
 					drawerIcon: () => (
 						<View
 							style={[styles.item, { backgroundColor: '#333' }]}
