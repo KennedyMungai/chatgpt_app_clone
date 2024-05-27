@@ -1,14 +1,18 @@
 import HeaderDropdown from '@/components/header-dropdown'
+import MessageInput from '@/components/message-input'
 import { defaultStyles } from '@/constants/Styles'
 import { useAuth } from '@clerk/clerk-expo'
 import { Stack } from 'expo-router'
 import React, { useState } from 'react'
-import { Button, StyleSheet, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 
 const NewChatPage = () => {
 	const [gptVersion, setGptVersion] = useState('3.5')
 
 	const { signOut } = useAuth()
+
+	const getCompletions = async (message: string) =>
+		console.log('Getting completions for: ', message)
 
 	return (
 		<View style={defaultStyles.pageContainer}>
@@ -27,7 +31,11 @@ const NewChatPage = () => {
 					)
 				}}
 			/>
-			<Button title='Sign Out' onPress={() => signOut()} />
+			<View style={{ flex: 1 }}>
+				<Text>Dummy Content</Text>
+				<Button title='Sign Out' onPress={() => signOut()} />
+			</View>
+			<MessageInput onShouldSendMessage={getCompletions} />
 		</View>
 	)
 }
