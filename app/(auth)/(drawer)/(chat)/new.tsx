@@ -19,7 +19,7 @@ const NewChatPage = () => {
 							title='ChatGPT'
 							items={[
 								{ key: '3.5', title: 'GPT-3.5', icon: 'bolt' },
-								{ key: '4', title: 'GPT-4', icon: 'sparkles' }
+								{ key: '4.0', title: 'GPT-4', icon: 'sparkles' }
 							]}
 							selected={gptVersion}
 							onSelect={(key) => setGptVersion(key)}
