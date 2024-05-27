@@ -1,24 +1,35 @@
 import HeaderDropdown from '@/components/header-dropdown'
+import { defaultStyles } from '@/constants/Styles'
 import { Stack } from 'expo-router'
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 const Dalle = () => {
-	const [gptVersion, setGptVersion] = useState('3.5')
-
 	return (
-		<View>
+		<View style={defaultStyles.pageContainer}>
 			<Stack.Screen
 				options={{
 					headerTitle: () => (
 						<HeaderDropdown
-							title='ChatGPT'
+							title='Dall E'
 							items={[
-								{ key: '3.5', title: 'GPT-3.5', icon: 'bolt' },
-								{ key: '4.0', title: 'GPT-4', icon: 'sparkles' }
+								{
+									key: 'share',
+									title: 'Share GPT',
+									icon: 'square.and.arrow.up'
+								},
+								{
+									key: 'details',
+									title: 'See Details',
+									icon: 'info.circle'
+								},
+								{
+									key: 'keep',
+									title: 'Keep in Sidebar',
+									icon: 'pin'
+								}
 							]}
-							selected={gptVersion}
-							onSelect={(key) => setGptVersion(key)}
+							onSelect={() => {}}
 						/>
 					)
 				}}
