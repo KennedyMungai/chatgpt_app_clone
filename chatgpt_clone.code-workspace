@@ -10,7 +10,9 @@
 			"Dalle",
 			"endregion",
 			"Ionicons",
+			"kennedymungai",
 			"Mika",
+			"myapp",
 			"redash"
 		],
 		"java.compile.nullAnalysis.mode": "automatic"
