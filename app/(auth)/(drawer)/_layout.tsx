@@ -131,6 +131,7 @@ const DrawerLayout = () => {
 				name='dalle'
 				options={{
 					title: 'Dall·E',
+					headerTitleAlign: 'center',
 					drawerIcon: () => (
 						<View style={[styles.item]}>
 							<Image
@@ -145,6 +146,7 @@ const DrawerLayout = () => {
 				name='explorer'
 				options={{
 					title: 'Explore GPTs',
+					headerTitleAlign: 'center',
 					drawerIcon: () => (
 						<View style={[styles.exploreItem]}>
 							<Ionicons name='apps-outline' size={18} />
