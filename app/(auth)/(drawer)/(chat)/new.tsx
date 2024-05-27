@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import { Button, StyleSheet, View } from 'react-native'
 
 const NewChatPage = () => {
-	const [gptVersion, setGptVersion] = useState<'3.5' | '4.0'>('3.5')
+	const [gptVersion, setGptVersion] = useState('3.5')
 
 	const { signOut } = useAuth()
 
@@ -22,7 +22,7 @@ const NewChatPage = () => {
 								{ key: '4', title: 'GPT-4', icon: 'sparkles' }
 							]}
 							selected={gptVersion}
-							onSelect={(key) => console.log(key)}
+							onSelect={(key) => setGptVersion(key)}
 						/>
 					)
 				}}
