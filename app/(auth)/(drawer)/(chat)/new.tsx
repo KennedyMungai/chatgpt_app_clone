@@ -1,6 +1,8 @@
 import HeaderDropdown from '@/components/header-dropdown'
+import MessageIdeas from '@/components/message-ideas'
 import MessageInput from '@/components/message-input'
 import { defaultStyles } from '@/constants/Styles'
+import { Message } from '@/utils/interfaces'
 import { useAuth } from '@clerk/clerk-expo'
 import { Stack } from 'expo-router'
 import React, { useState } from 'react'
@@ -15,6 +17,7 @@ import {
 
 const NewChatPage = () => {
 	const [gptVersion, setGptVersion] = useState('3.5')
+	const [messages, setMessages] = useState<Message[]>([])
 
 	const { signOut } = useAuth()
 
@@ -39,7 +42,6 @@ const NewChatPage = () => {
 				}}
 			/>
 			<View style={{ flex: 1 }}>
-				<Text>Dummy Content</Text>
 				<Button title='Sign Out' onPress={() => signOut()} />
 			</View>
 			<KeyboardAvoidingView
@@ -52,6 +54,9 @@ const NewChatPage = () => {
 					width: '100%'
 				}}
 			>
+				{messages.length === 0 && (
+					<MessageIdeas onSelectCard={getCompletions} />
+				)}
 				<MessageInput onShouldSendMessage={getCompletions} />
 			</KeyboardAvoidingView>
 		</View>
