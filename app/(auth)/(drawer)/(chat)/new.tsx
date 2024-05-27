@@ -4,7 +4,14 @@ import { defaultStyles } from '@/constants/Styles'
 import { useAuth } from '@clerk/clerk-expo'
 import { Stack } from 'expo-router'
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import {
+	Button,
+	KeyboardAvoidingView,
+	Platform,
+	StyleSheet,
+	Text,
+	View
+} from 'react-native'
 
 const NewChatPage = () => {
 	const [gptVersion, setGptVersion] = useState('3.5')
@@ -35,7 +42,12 @@ const NewChatPage = () => {
 				<Text>Dummy Content</Text>
 				<Button title='Sign Out' onPress={() => signOut()} />
 			</View>
-			<MessageInput onShouldSendMessage={getCompletions} />
+			<KeyboardAvoidingView
+				keyboardVerticalOffset={70}
+				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+			>
+				<MessageInput onShouldSendMessage={getCompletions} />
+			</KeyboardAvoidingView>
 		</View>
 	)
 }
