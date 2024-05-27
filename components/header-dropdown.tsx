@@ -33,7 +33,13 @@ const HeaderDropdown = ({
 						{title}
 					</Text>
 					{selected && (
-						<Text style={{ fontWeight: '600', fontSize: 14 }}>
+						<Text
+							style={{
+								fontWeight: '600',
+								fontSize: 16,
+								color: '#666'
+							}}
+						>
 							{selected} &gt;
 						</Text>
 					)}
