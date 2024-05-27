@@ -13,7 +13,8 @@
 			"kennedymungai",
 			"Mika",
 			"myapp",
-			"redash"
+			"redash",
+			"zeego"
 		],
 		"java.compile.nullAnalysis.mode": "automatic"
 	}
