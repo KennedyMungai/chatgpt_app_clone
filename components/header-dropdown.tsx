@@ -5,7 +5,7 @@ import * as DropdownMenu from 'zeego/dropdown-menu'
 
 export type HeaderDropDownProps = {
 	title: string
-	selected: string
+	selected?: string
 	onSelect: (key: string) => void
 	items: {
 		key: string
