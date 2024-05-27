@@ -45,6 +45,12 @@ const NewChatPage = () => {
 			<KeyboardAvoidingView
 				keyboardVerticalOffset={70}
 				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+				style={{
+					position: 'absolute',
+					bottom: 0,
+					left: 0,
+					width: '100%'
+				}}
 			>
 				<MessageInput onShouldSendMessage={getCompletions} />
 			</KeyboardAvoidingView>
