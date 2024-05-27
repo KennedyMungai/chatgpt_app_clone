@@ -1,9 +1,15 @@
 import Colors from '@/constants/Colors'
 import { FontAwesome5, Ionicons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
+import * as DocumentPicker from 'expo-document-picker'
+import * as ImagePicker from 'expo-image-picker'
 import React, { useState } from 'react'
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
-import Animated, { useSharedValue } from 'react-native-reanimated'
+import Animated, {
+	useAnimatedStyle,
+	useSharedValue,
+	withTiming
+} from 'react-native-reanimated'
 
 const AnimatedTouchableOpacity =
 	Animated.createAnimatedComponent(TouchableOpacity)
@@ -15,33 +21,91 @@ export type MessageInputProps = {
 const MessageInput = ({ onShouldSendMessage }: MessageInputProps) => {
 	const [message, setMessage] = useState('')
 
-	const expanded = useSharedValue(0)
+	const expanded = useSharedValue(1)
 
-	const expandItems = () => {}
+	const expandItems = () => {
+		expanded.value = withTiming(1, { duration: 400 })
+	}
 
-	const collapseItems = () => {}
+	const collapseItems = () => {
+		expanded.value = withTiming(0, { duration: 400 })
+	}
+
+	const onChangeText = (text: string) => {
+		collapseItems()
+
+		setMessage(text)
+	}
 
 	const onSend = () => {
-        onShouldSendMessage(message)
-        setMessage('')
-    }
+		onShouldSendMessage(message)
+		setMessage('')
+	}
+
+	const expandedButtonStyle = useAnimatedStyle(() => {
+		return {
+			opacity: expanded.value
+			// transform: [{ scale: expanded.value }]
+		}
+	})
+
+	const buttonViewStyle = useAnimatedStyle(() => {
+		return {
+			opacity: 1
+		}
+	})
 
 	return (
-		<BlurView intensity={90} style={{ padding: 16 }} tint='extraLight'>
+		<BlurView
+			intensity={90}
+			style={{ paddingVertical: 16 }}
+			tint='extraLight'
+		>
 			<View style={styles.row}>
 				<AnimatedTouchableOpacity
 					onPress={expandItems}
-					style={[styles.roundBtn]}
+					style={[styles.roundBtn, expandedButtonStyle]}
 				>
 					<Ionicons name='add' size={24} color={Colors.grey} />
 				</AnimatedTouchableOpacity>
+
+				<Animated.View style={[styles.buttonView, buttonViewStyle]}>
+					<TouchableOpacity
+						onPress={() => ImagePicker.launchCameraAsync()}
+					>
+						<Ionicons
+							name='camera-outline'
+							size={24}
+							color={Colors.grey}
+						/>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => ImagePicker.launchImageLibraryAsync()}
+					>
+						<Ionicons
+							name='image-outline'
+							size={24}
+							color={Colors.grey}
+						/>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => DocumentPicker.getDocumentAsync()}
+					>
+						<Ionicons
+							name='folder-outline'
+							size={24}
+							color={Colors.grey}
+						/>
+					</TouchableOpacity>
+				</Animated.View>
+
 				<TextInput
 					autoFocus
 					placeholder='Message'
 					style={styles.messageInput}
 					multiline
 					value={message}
-					onChangeText={setMessage}
+					onChangeText={onChangeText}
 					onFocus={collapseItems}
 				/>
 				{message.length > 0 ? (
@@ -91,5 +155,10 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderColor: Colors.greyLight,
 		backgroundColor: Colors.light
+	},
+	buttonView: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		gap: 12
 	}
 })
