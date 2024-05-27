@@ -1,3 +1,4 @@
+import Colors from '@/constants/Colors'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import * as DropdownMenu from 'zeego/dropdown-menu'
@@ -37,7 +38,7 @@ const HeaderDropdown = ({
 							style={{
 								fontWeight: '600',
 								fontSize: 16,
-								color: '#666'
+								color: Colors.greyLight
 							}}
 						>
 							{selected} &gt;
