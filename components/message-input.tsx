@@ -6,6 +6,8 @@ import * as ImagePicker from 'expo-image-picker'
 import React, { useState } from 'react'
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
 import Animated, {
+	Extrapolation,
+	interpolate,
 	useAnimatedStyle,
 	useSharedValue,
 	withTiming
@@ -21,7 +23,7 @@ export type MessageInputProps = {
 const MessageInput = ({ onShouldSendMessage }: MessageInputProps) => {
 	const [message, setMessage] = useState('')
 
-	const expanded = useSharedValue(1)
+	const expanded = useSharedValue(0)
 
 	const expandItems = () => {
 		expanded.value = withTiming(1, { duration: 400 })
@@ -42,16 +44,36 @@ const MessageInput = ({ onShouldSendMessage }: MessageInputProps) => {
 		setMessage('')
 	}
 
-	const expandedButtonStyle = useAnimatedStyle(() => {
+	const expandButtonStyle = useAnimatedStyle(() => {
+		const opacityInterpolation = interpolate(
+			expanded.value,
+			[0, 1],
+			[1, 0],
+			Extrapolation.CLAMP
+		)
+		const widthInterpolation = interpolate(
+			expanded.value,
+			[0, 1],
+			[30, 0],
+			Extrapolation.CLAMP
+		)
+
 		return {
-			opacity: expanded.value
-			// transform: [{ scale: expanded.value }]
+			opacity: opacityInterpolation,
+			width: widthInterpolation
 		}
 	})
 
 	const buttonViewStyle = useAnimatedStyle(() => {
+		const widthInterpolation = interpolate(
+			expanded.value,
+			[0, 1],
+			[0, 100],
+			Extrapolation.CLAMP
+		)
 		return {
-			opacity: 1
+			width: widthInterpolation,
+			opacity: expanded.value
 		}
 	})
 
@@ -64,7 +86,7 @@ const MessageInput = ({ onShouldSendMessage }: MessageInputProps) => {
 			<View style={styles.row}>
 				<AnimatedTouchableOpacity
 					onPress={expandItems}
-					style={[styles.roundBtn, expandedButtonStyle]}
+					style={[styles.roundBtn, expandButtonStyle]}
 				>
 					<Ionicons name='add' size={24} color={Colors.grey} />
 				</AnimatedTouchableOpacity>
