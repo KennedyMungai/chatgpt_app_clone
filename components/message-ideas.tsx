@@ -47,7 +47,14 @@ const MessageIdeas = ({ onSelectCard }: Props) => {
 						<Text style={{ fontSize: 16, fontWeight: 500 }}>
 							{message.title}
 						</Text>
-						<Text>{message.text}</Text>
+						<Text
+							style={{
+								fontSize: 14,
+								color: Colors.grey
+							}}
+						>
+							{message.text}
+						</Text>
 					</TouchableOpacity>
 				))}
 			</ScrollView>
