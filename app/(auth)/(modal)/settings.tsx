@@ -1,12 +1,25 @@
 import Colors from '@/constants/Colors'
+import { defaultStyles } from '@/constants/Styles'
 import { Storage } from '@/utils/storage'
+import { useAuth } from '@clerk/clerk-expo'
 import React from 'react'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import {
+	Button,
+	StyleSheet,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	View
+} from 'react-native'
 import { useMMKVString } from 'react-native-mmkv'
 
 const SettingsPage = () => {
 	const [key, setKey] = useMMKVString('apiKey', Storage)
 	const [organization, setOrganization] = useMMKVString('org', Storage)
+
+	const { signOut } = useAuth()
+
+	const saveApiKey = () => {}
 
 	return (
 		<View style={styles.container}>
@@ -33,8 +46,33 @@ const SettingsPage = () => {
 						autoCorrect={false}
 						autoCapitalize='none'
 					/>
+
+					<TouchableOpacity
+						style={[
+							defaultStyles.btn,
+							{ backgroundColor: Colors.primary }
+						]}
+						onPress={saveApiKey}
+					>
+						<Text style={styles.buttonText}>Save API Key</Text>
+					</TouchableOpacity>
 				</>
 			)}
+
+			<TouchableOpacity
+				onPress={() => signOut()}
+				style={{ marginTop: 8, borderRadius: 8 }}
+			>
+				<Text
+					style={{
+						alignSelf: 'center',
+						fontSize: 20,
+						fontWeight: '500'
+					}}
+				>
+					Sign Out
+				</Text>
+			</TouchableOpacity>
 		</View>
 	)
 }
