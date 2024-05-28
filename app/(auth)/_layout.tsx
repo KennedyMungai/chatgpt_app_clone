@@ -1,10 +1,10 @@
-import React from 'react'
-import { Stack, useNavigation } from 'expo-router'
-import { TouchableOpacity, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { Stack, useRouter } from 'expo-router'
+import React from 'react'
+import { TouchableOpacity } from 'react-native'
 
 const AuthLayout = () => {
-	const navigation = useNavigation()
+	const router = useRouter()
 
 	return (
 		<Stack>
@@ -19,13 +19,17 @@ const AuthLayout = () => {
 					headerTitleAlign: 'center',
 					headerShadowVisible: false,
 					headerLeft: () => (
-						<TouchableOpacity onPress={() => navigation.goBack()}>
-							<Ionicons
-								name='close-outline'
-								size={30}
-								color='black'
-							/>
-						</TouchableOpacity>
+						<>
+							{router.canGoBack() && (
+								<TouchableOpacity onPress={() => router.back()}>
+									<Ionicons
+										name='close-outline'
+										size={30}
+										color='black'
+									/>
+								</TouchableOpacity>
+							)}
+						</>
 					)
 				}}
 			/>
