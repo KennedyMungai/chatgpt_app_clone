@@ -44,7 +44,15 @@ const NewChatPage = () => {
 			{ content: message, role: ROLE.User },
 			{ role: ROLE.Bot, content: '' }
 		])
+
+		openAI.chat.stream({
+			messages: [{ role: 'user', content: message }],
+			model: gptVersion === '4' ? 'gpt-4' : 'gpt-3.5-turbo'
+		})
 	}
+
+	useEffect(() => {}, [openAI])
+	
 
 	const onLayout = (event: any) => {
 		const { height } = event.nativeEvent.layout
