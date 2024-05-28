@@ -51,7 +51,14 @@ const NewChatPage = () => {
 		})
 	}
 
-	useEffect(() => {}, [openAI])
+	useEffect(() => {
+		const handleMessage = (payload: any) => {}
+
+		openAI.chat.addListener('onChatMessageReceived', handleMessage)
+
+		return () =>
+			openAI.chat.removeListener('onChatMessageReceived', handleMessage)
+	}, [openAI])
 	
 
 	const onLayout = (event: any) => {
