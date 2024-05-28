@@ -27,6 +27,86 @@ const DUMMY_MESSAGES: Message[] = [
 		content:
 			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
 		role: ROLE.User
+	},
+	{
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
+		role: ROLE.Bot
+	},
+	{
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
+		role: ROLE.User
+	},
+	{
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
+		role: ROLE.Bot
+	},
+	{
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
+		role: ROLE.User
+	},
+	{
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
+		role: ROLE.Bot
+	},
+	{
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
+		role: ROLE.User
+	},
+	{
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
+		role: ROLE.Bot
+	},
+	{
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
+		role: ROLE.User
+	},
+	{
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
+		role: ROLE.Bot
+	},
+	{
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
+		role: ROLE.User
+	},
+	{
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
+		role: ROLE.Bot
+	},
+	{
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
+		role: ROLE.User
+	},
+	{
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
+		role: ROLE.Bot
+	},
+	{
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
+		role: ROLE.User
+	},
+	{
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
+		role: ROLE.Bot
+	},
+	{
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
+		role: ROLE.User
 	}
 ]
 
@@ -99,6 +179,7 @@ const NewChatPage = () => {
 					data={messages}
 					renderItem={({ item }) => <ChatMessage {...item} />}
 					estimatedItemSize={400}
+					contentContainerStyle={{ paddingBottom: 150 }}
 				/>
 			</View>
 			<KeyboardAvoidingView
