@@ -3,11 +3,11 @@ import HeaderDropdown from '@/components/header-dropdown'
 import MessageIdeas from '@/components/message-ideas'
 import MessageInput from '@/components/message-input'
 import { defaultStyles } from '@/constants/Styles'
-import { Message } from '@/utils/interfaces'
+import { Message, ROLE } from '@/utils/interfaces'
 import { Storage } from '@/utils/storage'
 import { FlashList } from '@shopify/flash-list'
 import { Redirect, Stack } from 'expo-router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import {
 	Image,
 	Keyboard,
@@ -17,6 +17,7 @@ import {
 	View
 } from 'react-native'
 import { useMMKVString } from 'react-native-mmkv'
+import OpenAI from 'react-native-openai'
 
 const NewChatPage = () => {
 	const [messages, setMessages] = useState<Message[]>([])
@@ -29,8 +30,21 @@ const NewChatPage = () => {
 	if (!key || key === '' || !organization || organization === '')
 		return <Redirect href='/(auth)/(modal)/settings' />
 
-	const getCompletions = async (message: string) =>
+	const openAI = useMemo(() => new OpenAI({ apiKey: key, organization }), [])
+
+	const getCompletions = async (message: string) => {
 		console.log('Getting completions for: ', message)
+
+		if (messages.length === 0) {
+			// TODO: Create chat later, store to DB
+		}
+
+		setMessages([
+			...messages,
+			{ content: message, role: ROLE.User },
+			{ role: ROLE.Bot, content: '' }
+		])
+	}
 
 	const onLayout = (event: any) => {
 		const { height } = event.nativeEvent.layout
