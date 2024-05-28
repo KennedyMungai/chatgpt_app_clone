@@ -2,27 +2,61 @@ import HeaderDropdown from '@/components/header-dropdown'
 import MessageIdeas from '@/components/message-ideas'
 import MessageInput from '@/components/message-input'
 import { defaultStyles } from '@/constants/Styles'
-import { Message } from '@/utils/interfaces'
+import { Message, ROLE } from '@/utils/interfaces'
 import { useAuth } from '@clerk/clerk-expo'
 import { Stack } from 'expo-router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
-	Button,
+	Image,
+	Keyboard,
 	KeyboardAvoidingView,
 	Platform,
 	StyleSheet,
-	Text,
 	View
 } from 'react-native'
 
+const DUMMY_MESSAGES: Message[] = [
+	{
+		content: 'Hello, how can I help you today?',
+		role: ROLE.Bot
+	},
+	{
+		content: 'I need help with my React Native app',
+		role: ROLE.User
+	}
+]
+
 const NewChatPage = () => {
 	const [gptVersion, setGptVersion] = useState('3.5')
-	const [messages, setMessages] = useState<Message[]>([])
+	const [messages, setMessages] = useState<Message[]>(DUMMY_MESSAGES)
+	const [height, setHeight] = useState(0)
+	const [keyboardStatus, setKeyboardStatus] = useState('')
 
 	const { signOut } = useAuth()
 
 	const getCompletions = async (message: string) =>
 		console.log('Getting completions for: ', message)
+
+	const onLayout = (event: any) => {
+		const { height } = event.nativeEvent.layout
+		setHeight(height)
+	}
+
+	useEffect(() => {
+		const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+			// setKeyboardStatus('Keyboard Shown')
+			console.log('Keyboard Shown')
+		})
+		const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+			// setKeyboardStatus('Keyboard Hidden')
+			console.log('Keyboard Hidden')
+		})
+
+		return () => {
+			showSubscription.remove()
+			hideSubscription.remove()
+		}
+	}, [])
 
 	return (
 		<View style={defaultStyles.pageContainer}>
@@ -41,8 +75,21 @@ const NewChatPage = () => {
 					)
 				}}
 			/>
-			<View style={{ flex: 1 }}>
-				<Button title='Sign Out' onPress={() => signOut()} />
+			<View style={{ flex: 1 }} onLayout={onLayout}>
+				{messages.length === 0 && (
+					<View
+						style={[
+							styles.logoContainer,
+							{ marginTop: height / 2 - 100 }
+						]}
+					>
+						<Image
+							source={require('@/assets/images/logo-white.png')}
+							style={styles.image}
+							resizeMode='contain'
+						/>
+					</View>
+				)}
 			</View>
 			<KeyboardAvoidingView
 				keyboardVerticalOffset={70}
@@ -65,4 +112,19 @@ const NewChatPage = () => {
 
 export default NewChatPage
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+	logoContainer: {
+		alignSelf: 'center',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 50,
+		height: 50,
+		borderRadius: 50,
+		backgroundColor: 'black'
+	},
+	image: {
+		width: 30,
+		height: 30,
+		resizeMode: 'cover'
+	}
+})
