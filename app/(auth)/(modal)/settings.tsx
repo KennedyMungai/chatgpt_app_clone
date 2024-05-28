@@ -3,7 +3,7 @@ import { defaultStyles } from '@/constants/Styles'
 import { Storage } from '@/utils/storage'
 import { useAuth } from '@clerk/clerk-expo'
 import { useRouter } from 'expo-router'
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	StyleSheet,
 	Text,
@@ -17,14 +17,17 @@ const SettingsPage = () => {
 	const [key, setKey] = useMMKVString('apiKey', Storage)
 	const [organization, setOrganization] = useMMKVString('org', Storage)
 
+	const [apiKey, setApiKey] = useState('')
+	const [org, setOrg] = useState('')
+
 	const router = useRouter()
 
 	const { signOut } = useAuth()
 
 	const saveApiKey = () => {
-		setKey(key)
-		setOrganization(organization)
-		router.navigate('/(auth)/(drawer)')
+		setKey(apiKey)
+		setOrganization(org)
+		router.navigate('/(auth)/(drawer)/(chat)/new')
 	}
 
 	const removeApiKey = () => {
@@ -54,14 +57,16 @@ const SettingsPage = () => {
 					<Text style={styles.label}>API Key & Organization</Text>
 					<TextInput
 						style={styles.input}
-						value={key}
+						value={apiKey}
+						onChangeText={setApiKey}
 						placeholder='Enter your API key'
 						autoCorrect={false}
 						autoCapitalize='none'
 					/>
 					<TextInput
 						style={styles.input}
-						value={organization}
+						value={org}
+						onChangeText={setOrg}
 						placeholder='Your organization'
 						autoCorrect={false}
 						autoCapitalize='none'
