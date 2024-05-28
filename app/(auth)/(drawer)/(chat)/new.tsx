@@ -19,11 +19,13 @@ import {
 
 const DUMMY_MESSAGES: Message[] = [
 	{
-		content: 'Hello, how can I help you today?',
+		content:
+			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
 		role: ROLE.Bot
 	},
 	{
-		content: 'I need help with my React Native app',
+		content:
+			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
 		role: ROLE.User
 	}
 ]
