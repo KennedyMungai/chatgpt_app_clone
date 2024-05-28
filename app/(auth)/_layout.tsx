@@ -17,6 +17,7 @@ const AuthLayout = () => {
 					animationDuration: 100,
 					headerTitle: 'Settings',
 					headerTitleAlign: 'center',
+					headerShadowVisible: false,
 					headerLeft: () => (
 						<TouchableOpacity onPress={() => navigation.goBack()}>
 							<Ionicons
