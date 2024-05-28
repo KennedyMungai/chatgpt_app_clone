@@ -179,7 +179,10 @@ const NewChatPage = () => {
 					data={messages}
 					renderItem={({ item }) => <ChatMessage {...item} />}
 					estimatedItemSize={400}
-					contentContainerStyle={{ paddingBottom: 150 }}
+					contentContainerStyle={{
+						paddingBottom: 150,
+						paddingTop: 30
+					}}
 				/>
 			</View>
 			<KeyboardAvoidingView
