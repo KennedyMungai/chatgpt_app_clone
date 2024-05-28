@@ -3,8 +3,8 @@ import HeaderDropdown from '@/components/header-dropdown'
 import MessageIdeas from '@/components/message-ideas'
 import MessageInput from '@/components/message-input'
 import { defaultStyles } from '@/constants/Styles'
-import { Message, ROLE } from '@/utils/interfaces'
-import { useAuth } from '@clerk/clerk-expo'
+import { Message } from '@/utils/interfaces'
+import { Storage } from '@/utils/storage'
 import { FlashList } from '@shopify/flash-list'
 import { Stack } from 'expo-router'
 import React, { useEffect, useState } from 'react'
@@ -16,12 +16,15 @@ import {
 	StyleSheet,
 	View
 } from 'react-native'
-
+import { useMMKVString } from 'react-native-mmkv'
 
 const NewChatPage = () => {
-	const [gptVersion, setGptVersion] = useState('3.5')
 	const [messages, setMessages] = useState<Message[]>([])
 	const [height, setHeight] = useState(0)
+
+	const [key, setKey] = useMMKVString('apiKey', Storage)
+	const [organization, setOrganization] = useMMKVString('org', Storage)
+	const [gptVersion, setGptVersion] = useMMKVString('gptVersion', Storage)
 
 	const getCompletions = async (message: string) =>
 		console.log('Getting completions for: ', message)
