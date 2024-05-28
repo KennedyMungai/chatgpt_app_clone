@@ -2,9 +2,9 @@ import Colors from '@/constants/Colors'
 import { defaultStyles } from '@/constants/Styles'
 import { Storage } from '@/utils/storage'
 import { useAuth } from '@clerk/clerk-expo'
+import { useRouter } from 'expo-router'
 import React from 'react'
 import {
-	Button,
 	StyleSheet,
 	Text,
 	TextInput,
@@ -17,14 +17,32 @@ const SettingsPage = () => {
 	const [key, setKey] = useMMKVString('apiKey', Storage)
 	const [organization, setOrganization] = useMMKVString('org', Storage)
 
+	const router = useRouter()
+
 	const { signOut } = useAuth()
 
-	const saveApiKey = () => {}
+	const saveApiKey = () => router.navigate('/(auth)/(drawer)')
+
+	const removeApiKey = () => {
+		setKey('')
+		setOrganization('')
+	}
 
 	return (
 		<View style={styles.container}>
 			{key && key !== '' && (
-				<Text style={styles.label}>You are all set</Text>
+				<>
+					<Text style={styles.label}>You are all set</Text>
+					<TouchableOpacity
+						style={[
+							defaultStyles.btn,
+							{ backgroundColor: Colors.primary }
+						]}
+						onPress={removeApiKey}
+					>
+						<Text style={styles.buttonText}>Remove API Key</Text>
+					</TouchableOpacity>
+				</>
 			)}
 
 			{(!key || key === '') && (
