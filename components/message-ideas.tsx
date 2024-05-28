@@ -1,5 +1,5 @@
-import React from 'react'
 import Colors from '@/constants/Colors'
+import React from 'react'
 import {
 	ScrollView,
 	StyleSheet,
@@ -44,7 +44,9 @@ const MessageIdeas = ({ onSelectCard }: Props) => {
 						}
 						style={styles.card}
 					>
-						<Text>{message.title}</Text>
+						<Text style={{ fontSize: 16, fontWeight: 500 }}>
+							{message.title}
+						</Text>
 						<Text>{message.text}</Text>
 					</TouchableOpacity>
 				))}
