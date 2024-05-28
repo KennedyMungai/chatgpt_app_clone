@@ -17,22 +17,10 @@ import {
 	View
 } from 'react-native'
 
-const DUMMY_MESSAGES: Message[] = [
-	{
-		content:
-			'Hello, how can I help you today?Hello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you todayHello, how can I help you today',
-		role: ROLE.Bot
-	},
-	{
-		content:
-			'I need help with my React Native app. I need help with my React Native app.  I need help with my React Native app. I need help with my React Native app. I need help with my React Native app',
-		role: ROLE.User
-	}
-]
 
 const NewChatPage = () => {
 	const [gptVersion, setGptVersion] = useState('3.5')
-	const [messages, setMessages] = useState<Message[]>(DUMMY_MESSAGES)
+	const [messages, setMessages] = useState<Message[]>([])
 	const [height, setHeight] = useState(0)
 	const [keyboardStatus, setKeyboardStatus] = useState('')
 
