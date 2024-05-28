@@ -15,13 +15,13 @@ const AuthLayout = () => {
 					presentation: 'modal',
 					animation: 'slide_from_bottom',
 					animationDuration: 100,
-					headerShown: false,
 					headerTitle: 'Settings',
+					headerTitleAlign: 'center',
 					headerLeft: () => (
 						<TouchableOpacity onPress={() => navigation.goBack()}>
 							<Ionicons
 								name='close-outline'
-								size={24}
+								size={30}
 								color='black'
 							/>
 						</TouchableOpacity>
