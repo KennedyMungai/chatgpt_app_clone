@@ -21,7 +21,11 @@ const SettingsPage = () => {
 
 	const { signOut } = useAuth()
 
-	const saveApiKey = () => router.navigate('/(auth)/(drawer)')
+	const saveApiKey = () => {
+		setKey(key)
+		setOrganization(organization)
+		router.navigate('/(auth)/(drawer)')
+	}
 
 	const removeApiKey = () => {
 		setKey('')
@@ -51,7 +55,6 @@ const SettingsPage = () => {
 					<TextInput
 						style={styles.input}
 						value={key}
-						onChangeText={setKey}
 						placeholder='Enter your API key'
 						autoCorrect={false}
 						autoCapitalize='none'
@@ -59,7 +62,6 @@ const SettingsPage = () => {
 					<TextInput
 						style={styles.input}
 						value={organization}
-						onChangeText={setOrganization}
 						placeholder='Your organization'
 						autoCorrect={false}
 						autoCapitalize='none'
