@@ -22,9 +22,6 @@ const NewChatPage = () => {
 	const [gptVersion, setGptVersion] = useState('3.5')
 	const [messages, setMessages] = useState<Message[]>([])
 	const [height, setHeight] = useState(0)
-	const [keyboardStatus, setKeyboardStatus] = useState('')
-
-	const { signOut } = useAuth()
 
 	const getCompletions = async (message: string) =>
 		console.log('Getting completions for: ', message)
