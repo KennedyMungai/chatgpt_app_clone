@@ -183,6 +183,7 @@ const NewChatPage = () => {
 						paddingBottom: 150,
 						paddingTop: 30
 					}}
+					keyboardDismissMode='on-drag'
 				/>
 			</View>
 			<KeyboardAvoidingView
