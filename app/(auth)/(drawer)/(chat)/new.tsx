@@ -52,12 +52,12 @@ const NewChatPage = () => {
 	}
 
 	useEffect(() => {
-		const handleMessage = (payload: any) => {}
+		const handleMessage = (payload: any) =>
+			console.log('Received message ', payload)
 
 		openAI.chat.addListener('onChatMessageReceived', handleMessage)
 
-		return () =>
-			openAI.chat.removeListener('onChatMessageReceived', handleMessage)
+		return () => openAI.chat.removeListener('onChatMessageReceived')
 	}, [openAI])
 	
 
