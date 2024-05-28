@@ -1,9 +1,11 @@
+import ChatMessage from '@/components/chat_message'
 import HeaderDropdown from '@/components/header-dropdown'
 import MessageIdeas from '@/components/message-ideas'
 import MessageInput from '@/components/message-input'
 import { defaultStyles } from '@/constants/Styles'
 import { Message, ROLE } from '@/utils/interfaces'
 import { useAuth } from '@clerk/clerk-expo'
+import { FlashList } from '@shopify/flash-list'
 import { Stack } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import {
@@ -90,6 +92,12 @@ const NewChatPage = () => {
 						/>
 					</View>
 				)}
+
+				<FlashList
+					data={messages}
+					renderItem={({ item }) => <ChatMessage {...item} />}
+					estimatedItemSize={400}
+				/>
 			</View>
 			<KeyboardAvoidingView
 				keyboardVerticalOffset={70}
