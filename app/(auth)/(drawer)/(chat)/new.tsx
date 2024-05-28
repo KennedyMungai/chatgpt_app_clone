@@ -6,7 +6,7 @@ import { defaultStyles } from '@/constants/Styles'
 import { Message } from '@/utils/interfaces'
 import { Storage } from '@/utils/storage'
 import { FlashList } from '@shopify/flash-list'
-import { Stack } from 'expo-router'
+import { Redirect, Stack } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import {
 	Image,
@@ -25,6 +25,9 @@ const NewChatPage = () => {
 	const [key, setKey] = useMMKVString('apiKey', Storage)
 	const [organization, setOrganization] = useMMKVString('org', Storage)
 	const [gptVersion, setGptVersion] = useMMKVString('gptVersion', Storage)
+
+	if (!key || key === '' || !organization || organization === '')
+		return <Redirect href='/(auth)/(modal)/settings' />
 
 	const getCompletions = async (message: string) =>
 		console.log('Getting completions for: ', message)
